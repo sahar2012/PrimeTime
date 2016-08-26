@@ -23,7 +23,6 @@ public class HintActivity extends AppCompatActivity {
         int receiveValue = getIntent().getIntExtra("hint", 0);
         randomNum.setText(Integer.toString(receiveValue));
 
-        System.out.println("blah");
         for(int i = 1;i<=Math.sqrt(receiveValue);i++)
         {
             if(receiveValue%i==0)
@@ -37,7 +36,6 @@ public class HintActivity extends AppCompatActivity {
         }
         Collections.sort(ListOfFactors);
 
-        System.out.println("blah222");
         String factorString = "";
 
         for(int i=0;i<ListOfFactors.size();i++)

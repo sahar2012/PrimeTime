@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     private Button nextButton;
     private Button hintButton;
     private Button cheatButton;
+    private TextView hintChecker;
+    private TextView cheatChecker;
+    int hintFlag = 0;
+    int cheatFlag = 0;
     private TextView testData;
     Random randomGenerator = new Random();
     Integer randomInt = randomGenerator.nextInt(1000);
@@ -28,10 +32,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedState);
         setContentView(R.layout.activity_main);
         testData = (TextView) findViewById(R.id.testNumber);
+        hintChecker = (TextView) findViewById(R.id.hintChecker);
+        cheatChecker = (TextView) findViewById(R.id.cheatChecker);
 
         if(savedState!=null)
         {
             randomInt=savedState.getInt("randomInt",randomGenerator.nextInt(1000));
+            hintFlag=savedState.getInt("hintTaken");
+            cheatFlag=savedState.getInt("cheatTaken");
+            if(hintFlag==1)
+                hintChecker.setVisibility(View.VISIBLE);
+            if(cheatFlag==1)
+                cheatChecker.setVisibility(View.VISIBLE);
             testData.setText(Integer.toString(randomInt));
         }
         else
@@ -47,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 randomInt = randomGenerator.nextInt(1000);
                 testData = (TextView) findViewById(R.id.testNumber);
                 testData.setText(Integer.toString(randomInt));
+                hintFlag=0;
+                hintChecker.setVisibility(View.INVISIBLE);
+                cheatFlag=0;
+                cheatChecker.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -132,7 +148,8 @@ public class MainActivity extends AppCompatActivity {
         hintButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-               showHint(view);
+                hintFlag = 1;
+                showHint(view);
             }
         });
 
@@ -140,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         cheatButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                cheatFlag = 1;
                 showCheat(view);
             }
         });
@@ -164,6 +182,12 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle savedState){
         super.onSaveInstanceState(savedState);
         savedState.putInt("randomInt",randomInt);
+        savedState.putInt("hintTaken",hintFlag);
+        savedState.putInt("cheatTaken",cheatFlag);
+        if(hintFlag==1)
+            hintChecker.setVisibility(View.VISIBLE);
+        if(cheatFlag==1)
+            cheatChecker.setVisibility(View.VISIBLE);
         Log.i(TAG, "Inside onSaveInstance");
     }
 
