@@ -60,7 +60,9 @@
         android:text="Show Hint"
         android:id="@+id/hintButton"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/question"
+        android:layout_alignEnd="@+id/yesButton" />
 
     <Button
         android:layout_width="wrap_content"
@@ -68,7 +70,9 @@
         android:text="Show Cheat"
         android:id="@+id/cheatButton"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/hintButton"
+        android:layout_alignStart="@+id/noButton" />
 
     <TextView
         android:layout_width="wrap_content"
