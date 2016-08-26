@@ -1,5 +1,6 @@
 package com.example.sahar.quizapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private Button yesButton;
     private Button noButton;
     private Button nextButton;
+    private Button hintButton;
+    private Button cheatButton;
     private TextView testData;
     Random randomGenerator = new Random();
     Integer randomInt = randomGenerator.nextInt(1000);
@@ -125,6 +128,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        hintButton = (Button) findViewById(R.id.hintButton);
+        hintButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+               showHint(view);
+            }
+        });
+
+        cheatButton = (Button) findViewById(R.id.cheatButton);
+        cheatButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                showCheat(view);
+            }
+        });
+
+    }
+
+    public void showHint(View view)
+    {
+        Intent intent = new Intent(this, HintActivity.class);
+        intent.putExtra("hint", randomInt);
+        startActivity(intent);
+    }
+
+    public void showCheat(View view)
+    {
+        Intent intent = new Intent(this, CheatActivity.class);
+        intent.putExtra("cheat", randomInt);
+        startActivity(intent);
     }
 
     @Override

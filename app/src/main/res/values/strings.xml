@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PrimeTime</string>
+    <string name="title_activity_cheat">cheatActivity</string>
 </resources>
